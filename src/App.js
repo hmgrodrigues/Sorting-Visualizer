@@ -1,8 +1,8 @@
-import logo from "./logo.svg";
 import "./App.css";
+import NavBar from "./components/navBar";
 
 function App() {
-  return <h1>Hello World</h1>;
+  return <NavBar />;
 }
 
 export default App;
