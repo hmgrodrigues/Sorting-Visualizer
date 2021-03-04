@@ -1,12 +1,17 @@
 import React from "react";
 
-const NavBar = ({ arraySize, onChangeRandomizeArray, onChangeArraySize }) => {
+const NavBar = ({
+  arraySize,
+  onClickRandomizeArray,
+  onChangeArraySize,
+  onClickBubbleSort,
+}) => {
   return (
     <div id="navbar">
       <button
         type="button"
         className="btn btn-outline-light randomize"
-        onClick={onChangeRandomizeArray}
+        onClick={onClickRandomizeArray}
       >
         Randomize Array
       </button>
@@ -22,7 +27,11 @@ const NavBar = ({ arraySize, onChangeRandomizeArray, onChangeArraySize }) => {
           onChange={onChangeArraySize}
         />
       </div>
-      <button type="button" className="btn btn-primary algorithm">
+      <button
+        type="button"
+        className="btn btn-primary algorithm"
+        onClick={onClickBubbleSort}
+      >
         Bubble Sort
       </button>
       <button type="button" className="btn btn-secondary algorithm ">

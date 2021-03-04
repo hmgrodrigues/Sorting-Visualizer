@@ -8,7 +8,6 @@ class Table extends Component {
     const { bars } = this.props;
     const width = 300 / bars.length;
     const marginRight = 2;
-    console.log(marginRight);
     return (
       <div className="tableContainer">
         {bars.map((bar) => (
@@ -17,6 +16,7 @@ class Table extends Component {
             height={bar.height}
             width={width}
             marginRight={marginRight}
+            status={bar.status ? bar.status : null}
           />
         ))}
       </div>

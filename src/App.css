@@ -56,8 +56,8 @@
   text-align: center;
 }
 
-/* Regular Bar */
-.regularBar {
+/* Vertical Bar */
+.regular {
   display: inline-block;
   vertical-align: top;
 }
