@@ -8,15 +8,9 @@ class NavBar extends Component {
         <button type="button" className="btn btn-outline-light randomize">
           Randomize Array
         </button>
-        <div className="slider">
+        <div className="sliderContainer">
           <h5>Array Size</h5>
-          <input
-            type="range"
-            min="1"
-            max="100"
-            step="1"
-            className="inputSlider"
-          />
+          <input type="range" min="1" max="100" step="1" className="slider" />
         </div>
         <button type="button" className="btn btn-primary algorithm">
           Bubble Sort
