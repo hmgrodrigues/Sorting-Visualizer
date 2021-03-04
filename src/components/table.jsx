@@ -6,11 +6,18 @@ class Table extends Component {
 
   render() {
     const { bars } = this.props;
-    const width = bars.length * 0.1;
+    const width = 300 / bars.length;
+    const marginRight = 2;
+    console.log(marginRight);
     return (
       <div className="tableContainer">
         {bars.map((bar) => (
-          <VerticalBar key={bar.id} height={bar.height} width={width} />
+          <VerticalBar
+            key={bar.id}
+            height={bar.height}
+            width={width}
+            marginRight={marginRight}
+          />
         ))}
       </div>
     );

@@ -9,15 +9,14 @@ class App extends Component {
   };
 
   componentDidMount() {
-    const bars = this.generateRandom(50);
-    console.log(bars);
+    const bars = this.generateRandom(78);
     this.setState({ bars });
   }
 
   generateRandom(arraySize) {
     const array = [];
     for (let i = 0; i < arraySize; i++)
-      array.push({ id: i, height: Math.floor(Math.random() * 200) + 10 });
+      array.push({ id: i, height: Math.floor(Math.random() * 500) + 20 });
     return array;
   }
 
@@ -36,6 +35,7 @@ class App extends Component {
     return (
       <Fragment>
         <NavBar
+          arraySize={bars.length === 0 ? 78 : bars.length}
           onChangeRandomizeArray={this.handleRandomizeArray}
           onChangeArraySize={this.handleArraySizeChange}
         />

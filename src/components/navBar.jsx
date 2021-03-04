@@ -1,6 +1,6 @@
 import React from "react";
 
-const NavBar = ({ onChangeRandomizeArray, onChangeArraySize }) => {
+const NavBar = ({ arraySize, onChangeRandomizeArray, onChangeArraySize }) => {
   return (
     <div id="navbar">
       <button
@@ -14,9 +14,10 @@ const NavBar = ({ onChangeRandomizeArray, onChangeArraySize }) => {
         <h5>Array Size</h5>
         <input
           type="range"
-          min="0"
-          max="100"
+          min="5"
+          max="150"
           step="2"
+          value={arraySize}
           className="slider"
           onChange={onChangeArraySize}
         />

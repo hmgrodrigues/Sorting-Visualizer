@@ -16,7 +16,7 @@
 .algorithm {
   position: relative;
   top: -74px;
-  left: 550px;
+  left: 540px;
   margin: 0 43px;
 }
 
@@ -53,13 +53,11 @@
 
 /* Table Container */
 .tableContainer {
-  border: 3px solid blue;
   text-align: center;
 }
 
 /* Regular Bar */
 .regularBar {
   display: inline-block;
-  margin-right: 5px;
   vertical-align: top;
 }
