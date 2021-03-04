@@ -56,3 +56,10 @@
   border: 3px solid blue;
   text-align: center;
 }
+
+/* Regular Bar */
+.regularBar {
+  display: inline-block;
+  margin-right: 5px;
+  vertical-align: top;
+}

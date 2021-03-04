@@ -3,11 +3,15 @@ import VerticalBar from "../common/verticalBar";
 
 class Table extends Component {
   state = {};
+
   render() {
+    const { bars } = this.props;
+    const width = bars.length * 0.1;
     return (
       <div className="tableContainer">
-        <VerticalBar width={120} height={200} />
-        <VerticalBar width={15} height={100} />
+        {bars.map((bar) => (
+          <VerticalBar key={bar.id} height={bar.height} width={width} />
+        ))}
       </div>
     );
   }
