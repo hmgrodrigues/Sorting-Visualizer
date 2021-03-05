@@ -6,7 +6,7 @@ class Table extends Component {
 
   render() {
     const { bars } = this.props;
-    const width = 300 / bars.length;
+    const width = 400 / bars.length;
     const marginRight = 2;
     return (
       <div className="tableContainer">

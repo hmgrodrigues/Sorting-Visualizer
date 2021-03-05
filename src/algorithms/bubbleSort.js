@@ -1,19 +1,21 @@
 export function bubbleSort(array) {
-  let count = -1;
+  for (let i = 0; i < array.length; i++) {
+    let count = 0;
 
-  while (count !== 0) {
-    count = 0;
-    for (let i = 0; i < array.length - i - 1; i++) {
-      let current = array[i].height;
-      let next = array[i + 1].height;
+    for (let j = 0; j < array.length - i - 1; j++) {
+      let current = array[j];
+      let next = array[j + 1];
 
-      if (current > next) {
-        const aux = array[i];
-        array[i] = array[i + 1];
-        array[i + 1] = aux;
+      if (current.height > next.height) {
+        const aux = array[j];
+        array[j] = array[j + 1];
+        array[j + 1] = aux;
         count++;
       }
     }
+    if (count === 0) break;
   }
+
+  console.log(array);
   return array;
 }
