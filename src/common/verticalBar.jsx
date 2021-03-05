@@ -7,6 +7,8 @@ const VerticalBar = ({ width, height, marginRight, status }) => {
     ? "green"
     : status === "swap"
     ? "red"
+    : status === "done"
+    ? "blue"
     : "black";
 
   const style = {

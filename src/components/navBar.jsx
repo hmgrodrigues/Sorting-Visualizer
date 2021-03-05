@@ -5,6 +5,7 @@ const NavBar = ({
   onClickRandomizeArray,
   onChangeArraySize,
   onClickBubbleSort,
+  isRunning,
 }) => {
   return (
     <div id="navbar">
@@ -12,6 +13,7 @@ const NavBar = ({
         type="button"
         className="btn btn-outline-light randomize"
         onClick={onClickRandomizeArray}
+        disabled={isRunning}
       >
         Randomize Array
       </button>
@@ -25,6 +27,7 @@ const NavBar = ({
           value={arraySize}
           className="slider"
           onChange={onChangeArraySize}
+          disabled={isRunning}
         />
       </div>
       <button
