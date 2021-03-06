@@ -5,7 +5,8 @@ const NavBar = ({
   onClickRandomizeArray,
   onChangeArraySize,
   onClickBubbleSort,
-  isRunning,
+  onClickMergeSort,
+  // isRunning,
 }) => {
   return (
     <div id="navbar">
@@ -13,7 +14,7 @@ const NavBar = ({
         type="button"
         className="btn btn-outline-light randomize"
         onClick={onClickRandomizeArray}
-        disabled={isRunning}
+        // disabled={isRunning}
       >
         Randomize Array
       </button>
@@ -27,7 +28,7 @@ const NavBar = ({
           value={arraySize}
           className="slider"
           onChange={onChangeArraySize}
-          disabled={isRunning}
+          // disabled={isRunning}
         />
       </div>
       <button
@@ -37,7 +38,11 @@ const NavBar = ({
       >
         Bubble Sort
       </button>
-      <button type="button" className="btn btn-secondary algorithm ">
+      <button
+        type="button"
+        className="btn btn-secondary algorithm "
+        onClick={onClickMergeSort}
+      >
         Merge Sort
       </button>
       <button type="button" className="btn btn-success algorithm">
