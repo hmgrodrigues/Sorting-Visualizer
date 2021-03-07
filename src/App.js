@@ -5,7 +5,7 @@ import { randomize, swapElements } from "./algorithms/utils";
 import "./App.css";
 
 const START_POINT = 78;
-const ACC = 3000;
+const ACC = 50;
 
 function App() {
   const [bars, setBars] = useState([]);
@@ -57,23 +57,22 @@ function App() {
 
   const mergeSort = () => {
     const unsortedBars = [...bars];
-    sort(unsortedBars, 0, unsortedBars.length - 1, 1000);
+    sort(unsortedBars, 0, unsortedBars.length - 1, ACC, true);
   };
 
-  const sort = (arr, l, r, delay) => {
+  const sort = (arr, l, r, delay, last) => {
     if (l < r) {
       const m = Math.floor((l + r) / 2);
 
-      // console.log(l, r, delay);
-      const delay1 = sort(arr, l, m, delay);
-      const delay2 = sort(arr, m + 1, r, delay1);
+      const delay1 = sort(arr, l, m, delay, false);
+      const delay2 = sort(arr, m + 1, r, delay1, false);
 
-      return merge(arr, l, m, r, delay2);
+      return merge(arr, l, m, r, delay2, last);
     }
     return delay;
   };
 
-  const merge = (arr, l, m, r, delay) => {
+  const merge = (arr, l, m, r, delay, last) => {
     const n1 = m - l + 1;
     const n2 = r - m;
 
@@ -82,35 +81,50 @@ function App() {
     for (let i = 0; i < n1; i++) L[i] = arr[l + i];
     for (let j = 0; j < n2; j++) R[j] = arr[m + 1 + j];
 
-    let i = 0;
-    let j = 0;
+    let i = 0,
+      j = 0;
 
     let k = l;
     while (i < n1 && j < n2) {
       colorElements(arr, [l + i, m + 1 + j], delay, "eval");
       delay += ACC;
       if (L[i].height <= R[j].height) {
-        const idx = arr.indexOf(L[i]);
-        arr.splice(idx, 1);
+        arr.splice(arr.indexOf(L[i]), 1);
         arr.splice(k++, 0, L[i++]);
       } else {
-        const idx = arr.indexOf(R[j]);
-        arr.splice(idx, 1);
+        colorElements(
+          arr,
+          [arr.indexOf(L[i]), arr.indexOf(R[j])],
+          delay,
+          "swap"
+        );
+        delay += ACC;
+        arr.splice(arr.indexOf(R[j]), 1);
         arr.splice(k++, 0, R[j++]);
       }
-      // colorElements(arr, [k - 1], delay, "abc");
-      // delay += ACC;
+
+      if (last) {
+        arr[k - 1].status = "done";
+        colorElements(arr, [k - 1], delay);
+        delay += ACC;
+      }
     }
 
     while (i < n1) {
       arr[k++] = L[i++];
-      // colorElements(arr, [k - 1], delay, "abc");
-      // delay += ACC;
+      if (last) {
+        arr[k - 1].status = "done";
+        colorElements(arr, [k - 1], delay);
+        delay += ACC;
+      }
     }
     while (j < n2) {
       arr[k++] = R[j++];
-      // colorElements(arr, [k - 1], delay, "abc");
-      // delay += ACC;
+      if (last) {
+        arr[k - 1].status = "done";
+        colorElements(arr, [k - 1], delay);
+        delay += ACC;
+      }
     }
 
     return delay;
@@ -125,9 +139,7 @@ function App() {
   };
 
   const delayAnimation = (arr, delay) => {
-    // const newArray = [...arr];
     setTimeout(() => {
-      console.log(arr);
       setBars(arr);
     }, delay);
   };
