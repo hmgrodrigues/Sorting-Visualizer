@@ -5,7 +5,7 @@ import { randomize, swapElements } from "./algorithms/utils";
 import "./App.css";
 
 const START_POINT = 78;
-const ACC = 50;
+const ACC = 3000;
 
 function App() {
   const [bars, setBars] = useState([]);
@@ -91,12 +91,12 @@ function App() {
       delay += ACC;
       if (L[i].height <= R[j].height) {
         const idx = arr.indexOf(L[i]);
+        arr.splice(idx, 1);
         arr.splice(k++, 0, L[i++]);
-        arr.splice(idx + 1, 1);
       } else {
         const idx = arr.indexOf(R[j]);
+        arr.splice(idx, 1);
         arr.splice(k++, 0, R[j++]);
-        arr.splice(idx + 1, 1);
       }
       // colorElements(arr, [k - 1], delay, "abc");
       // delay += ACC;
@@ -127,6 +127,7 @@ function App() {
   const delayAnimation = (arr, delay) => {
     // const newArray = [...arr];
     setTimeout(() => {
+      console.log(arr);
       setBars(arr);
     }, delay);
   };
