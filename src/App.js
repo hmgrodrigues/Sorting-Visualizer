@@ -5,7 +5,7 @@ import { randomize, swapElements } from "./algorithms/utils";
 import "./App.css";
 
 const START_POINT = 78;
-const ACC = 50;
+const ACC = 1000;
 
 function App() {
   const [bars, setBars] = useState([]);
@@ -16,7 +16,7 @@ function App() {
 
   const bubbleSort = () => {
     const unsortedBars = [...bars];
-    let delay = ACC;
+    let delay = 100;
 
     let stop = null;
     for (var i = 0; i < unsortedBars.length; i++) {
@@ -57,7 +57,7 @@ function App() {
 
   const mergeSort = () => {
     const unsortedBars = [...bars];
-    sort(unsortedBars, 0, unsortedBars.length - 1, ACC, true);
+    sort(unsortedBars, 0, unsortedBars.length - 1, 100, true);
   };
 
   const sort = (arr, l, r, delay, last) => {
@@ -86,26 +86,25 @@ function App() {
 
     let k = l;
     while (i < n1 && j < n2) {
-      colorElements(arr, [l + i, m + 1 + j], delay, "eval");
+      const lIndex = arr.indexOf(L[i]);
+      const rIndex = arr.indexOf(R[j]);
+      colorElements(arr, [lIndex, rIndex], delay, "eval");
       delay += ACC;
       if (L[i].height <= R[j].height) {
-        arr.splice(arr.indexOf(L[i]), 1);
+        arr.splice(lIndex, 1);
         arr.splice(k++, 0, L[i++]);
       } else {
-        colorElements(
-          arr,
-          [arr.indexOf(L[i]), arr.indexOf(R[j])],
-          delay,
-          "swap"
-        );
+        colorElements(arr, [lIndex, rIndex], delay, "swap");
         delay += ACC;
-        arr.splice(arr.indexOf(R[j]), 1);
+        arr.splice(rIndex, 1);
         arr.splice(k++, 0, R[j++]);
+        colorElements(arr, [k - 1, k], delay, "eval");
+        delay += ACC;
       }
 
       if (last) {
         arr[k - 1].status = "done";
-        colorElements(arr, [k - 1], delay);
+        colorElements(arr, [], delay);
         delay += ACC;
       }
     }
@@ -114,7 +113,7 @@ function App() {
       arr[k++] = L[i++];
       if (last) {
         arr[k - 1].status = "done";
-        colorElements(arr, [k - 1], delay);
+        colorElements(arr, [], delay);
         delay += ACC;
       }
     }
@@ -122,7 +121,7 @@ function App() {
       arr[k++] = R[j++];
       if (last) {
         arr[k - 1].status = "done";
-        colorElements(arr, [k - 1], delay);
+        colorElements(arr, [], delay);
         delay += ACC;
       }
     }
