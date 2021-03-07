@@ -7,7 +7,7 @@ const NavBar = ({
   onClickBubbleSort,
   onClickMergeSort,
   onClickQuickSort,
-  // isRunning,
+  onClickHeapSort,
 }) => {
   return (
     <div id="navbar">
@@ -15,7 +15,6 @@ const NavBar = ({
         type="button"
         className="btn btn-outline-light randomize"
         onClick={onClickRandomizeArray}
-        // disabled={isRunning}
       >
         Randomize Array
       </button>
@@ -29,7 +28,6 @@ const NavBar = ({
           value={arraySize}
           className="slider"
           onChange={onChangeArraySize}
-          // disabled={isRunning}
         />
       </div>
       <button
@@ -53,7 +51,11 @@ const NavBar = ({
       >
         Quick Sort
       </button>
-      <button type="button" className="btn btn-danger algorithm">
+      <button
+        type="button"
+        className="btn btn-danger algorithm"
+        onClick={onClickHeapSort}
+      >
         Heap Sort
       </button>
     </div>

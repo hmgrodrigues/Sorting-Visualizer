@@ -5,7 +5,7 @@ import { randomize, swapElements } from "./algorithms/utils";
 import "./App.css";
 
 const START_POINT = 78;
-const ACC = 10;
+const ACC = 1000;
 
 function App() {
   const [bars, setBars] = useState([]);
@@ -170,6 +170,53 @@ function App() {
     return [i + 1, delay];
   }
 
+  // Heap Sort
+  const heapSort = (arr, n) => {
+    let delay = ACC;
+    console.log(n);
+    for (let i = Math.floor(n / 2) - 1; i >= 0; i--)
+      delay += heapify(arr, n, i, delay);
+
+    for (let i = n - 1; i > 0; i--) {
+      colorElements(arr, [0, i], delay, "swap");
+      delay += ACC;
+      swapElements(arr, 0, i);
+      arr[i].status = "done";
+      colorElements(arr, [], delay);
+      delay += ACC;
+      delay += heapify(arr, i, 0, delay);
+    }
+  };
+
+  const heapify = (arr, n, i, delay) => {
+    let largest = i;
+    let l = 2 * i + 1;
+    let r = 2 * i + 2;
+
+    if (l < n) {
+      colorElements(arr, [l, largest], delay, "heapTest");
+      delay += ACC;
+      if (arr[l].height > arr[largest].height) largest = l;
+    }
+
+    if (r < n) {
+      colorElements(arr, [r, largest], delay, "heapTest");
+      delay += ACC;
+      if (arr[r].height > arr[largest].height) largest = r;
+    }
+
+    if (largest !== i) {
+      colorElements(arr, [i, largest], delay, "swap");
+      delay += ACC;
+      swapElements(arr, i, largest);
+      colorElements(arr, [i, largest], delay, "eval");
+      delay += ACC;
+      delay += heapify(arr, n, largest, delay);
+    }
+
+    return delay;
+  };
+
   const colorElements = (arr, elements, delay, action) => {
     const newArr = arr.map((bar) => {
       return { ...bar };
@@ -193,11 +240,15 @@ function App() {
         onClickBubbleSort={bubbleSort}
         onClickMergeSort={() => {
           const unsortedBars = [...bars];
-          mergeSort(unsortedBars, 0, unsortedBars.length - 1, 100, true);
+          mergeSort(unsortedBars, 0, unsortedBars.length - 1, ACC, true);
         }}
         onClickQuickSort={() => {
           const unsortedBars = [...bars];
           quickSort(unsortedBars, 0, unsortedBars.length - 1, ACC);
+        }}
+        onClickHeapSort={() => {
+          const unsortedBars = [...bars];
+          heapSort(unsortedBars, unsortedBars.length);
         }}
       />
       <Body bars={bars} />
