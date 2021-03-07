@@ -5,7 +5,7 @@ import { randomize, swapElements } from "./algorithms/utils";
 import "./App.css";
 
 const START_POINT = 78;
-const ACC = 100;
+const ACC = 10;
 
 function App() {
   const [bars, setBars] = useState([]);
@@ -133,6 +133,10 @@ function App() {
 
       const leftDelay = quickSort(arr, low, pivot - 1, partDelay);
       return quickSort(arr, pivot + 1, high, leftDelay);
+    } else if (low < arr.length) {
+      arr[low].status = "done";
+      colorElements(arr, [], delay);
+      return delay + ACC;
     }
     return delay;
   };
