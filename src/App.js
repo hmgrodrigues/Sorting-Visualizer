@@ -5,7 +5,7 @@ import { randomize, swapElements } from "./algorithms/utils";
 import "./App.css";
 
 const START_POINT = 78;
-const ACC = 1000;
+const ACC = 10;
 
 function App() {
   const [bars, setBars] = useState([]);
@@ -129,6 +129,7 @@ function App() {
   // Quick Sort
   const quickSort = (arr, low, high, delay) => {
     if (low < high) {
+      console.log(delay);
       const [pivot, partDelay] = partition(arr, low, high, delay);
 
       const leftDelay = quickSort(arr, low, pivot - 1, partDelay);
@@ -173,9 +174,9 @@ function App() {
   // Heap Sort
   const heapSort = (arr, n) => {
     let delay = ACC;
-    console.log(n);
-    for (let i = Math.floor(n / 2) - 1; i >= 0; i--)
-      delay += heapify(arr, n, i, delay);
+    for (let i = Math.floor(n / 2) - 1; i >= 0; i--) {
+      delay = heapify(arr, n, i, delay);
+    }
 
     for (let i = n - 1; i > 0; i--) {
       colorElements(arr, [0, i], delay, "swap");
@@ -184,8 +185,10 @@ function App() {
       arr[i].status = "done";
       colorElements(arr, [], delay);
       delay += ACC;
-      delay += heapify(arr, i, 0, delay);
+      delay = heapify(arr, i, 0, delay);
     }
+    arr[0].status = "done";
+    colorElements(arr, [], delay);
   };
 
   const heapify = (arr, n, i, delay) => {
@@ -211,7 +214,7 @@ function App() {
       swapElements(arr, i, largest);
       colorElements(arr, [i, largest], delay, "eval");
       delay += ACC;
-      delay += heapify(arr, n, largest, delay);
+      delay = heapify(arr, n, largest, delay);
     }
 
     return delay;
