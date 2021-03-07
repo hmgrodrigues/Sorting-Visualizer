@@ -5,7 +5,7 @@ import { randomize, swapElements } from "./algorithms/utils";
 import "./App.css";
 
 const START_POINT = 78;
-const ACC = 1000;
+const ACC = 100;
 
 function App() {
   const [bars, setBars] = useState([]);
@@ -14,6 +14,7 @@ function App() {
     setBars(randomize(START_POINT));
   }, []);
 
+  // Bubble Sort
   const bubbleSort = () => {
     const unsortedBars = [...bars];
     let delay = 100;
@@ -55,17 +56,13 @@ function App() {
     }
   };
 
-  const mergeSort = () => {
-    const unsortedBars = [...bars];
-    sort(unsortedBars, 0, unsortedBars.length - 1, 100, true);
-  };
-
-  const sort = (arr, l, r, delay, last) => {
+  // Merge Sort
+  const mergeSort = (arr, l, r, delay, last) => {
     if (l < r) {
       const m = Math.floor((l + r) / 2);
 
-      const delay1 = sort(arr, l, m, delay, false);
-      const delay2 = sort(arr, m + 1, r, delay1, false);
+      const delay1 = mergeSort(arr, l, m, delay, false);
+      const delay2 = mergeSort(arr, m + 1, r, delay1, false);
 
       return merge(arr, l, m, r, delay2, last);
     }
@@ -129,6 +126,46 @@ function App() {
     return delay;
   };
 
+  // Quick Sort
+  const quickSort = (arr, low, high, delay) => {
+    if (low < high) {
+      const [pivot, partDelay] = partition(arr, low, high, delay);
+
+      const leftDelay = quickSort(arr, low, pivot - 1, partDelay);
+      return quickSort(arr, pivot + 1, high, leftDelay);
+    }
+    return delay;
+  };
+
+  function partition(arr, low, high, delay) {
+    arr[high].status = "pivot";
+
+    const pivot = arr[high];
+    let i = low - 1;
+
+    for (let j = low; j <= high - 1; j++) {
+      colorElements(arr, [i + 1, j], delay, "eval");
+      delay += ACC;
+      if (arr[j].height < pivot.height) {
+        colorElements(arr, [i + 1, j], delay, "swap");
+        delay += ACC;
+        swapElements(arr, ++i, j);
+        colorElements(arr, [i, j], delay, "eval");
+        delay += ACC;
+      }
+    }
+
+    colorElements(arr, [i + 1, high], delay, "swap");
+    delay += ACC;
+    swapElements(arr, i + 1, high);
+    colorElements(arr, [i + 1, high], delay, "eval");
+    delay += ACC;
+    arr[i + 1].status = "done";
+    colorElements(arr, [], delay);
+    delay += ACC;
+    return [i + 1, delay];
+  }
+
   const colorElements = (arr, elements, delay, action) => {
     const newArr = arr.map((bar) => {
       return { ...bar };
@@ -150,7 +187,14 @@ function App() {
         onClickRandomizeArray={() => setBars(randomize(bars.length))}
         onChangeArraySize={(e) => setBars(randomize(e.target.value))}
         onClickBubbleSort={bubbleSort}
-        onClickMergeSort={mergeSort}
+        onClickMergeSort={() => {
+          const unsortedBars = [...bars];
+          mergeSort(unsortedBars, 0, unsortedBars.length - 1, 100, true);
+        }}
+        onClickQuickSort={() => {
+          const unsortedBars = [...bars];
+          quickSort(unsortedBars, 0, unsortedBars.length - 1, ACC);
+        }}
       />
       <Body bars={bars} />
     </Fragment>

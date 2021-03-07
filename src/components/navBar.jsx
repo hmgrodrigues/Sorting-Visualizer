@@ -6,6 +6,7 @@ const NavBar = ({
   onChangeArraySize,
   onClickBubbleSort,
   onClickMergeSort,
+  onClickQuickSort,
   // isRunning,
 }) => {
   return (
@@ -45,7 +46,11 @@ const NavBar = ({
       >
         Merge Sort
       </button>
-      <button type="button" className="btn btn-success algorithm">
+      <button
+        type="button"
+        className="btn btn-success algorithm"
+        onClick={onClickQuickSort}
+      >
         Quick Sort
       </button>
       <button type="button" className="btn btn-danger algorithm">

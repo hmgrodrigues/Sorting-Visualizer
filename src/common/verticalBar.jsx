@@ -7,6 +7,8 @@ const VerticalBar = ({ width, height, marginRight, status }) => {
     ? "green"
     : status === "swap"
     ? "red"
+    : status === "pivot"
+    ? "yellow"
     : status === "done"
     ? "blue"
     : "black";
