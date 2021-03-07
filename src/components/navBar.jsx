@@ -8,6 +8,7 @@ const NavBar = ({
   onClickMergeSort,
   onClickQuickSort,
   onClickHeapSort,
+  isRunning,
 }) => {
   return (
     <div id="navbar">
@@ -15,25 +16,28 @@ const NavBar = ({
         type="button"
         className="btn btn-outline-light randomize"
         onClick={onClickRandomizeArray}
+        disabled={isRunning}
       >
         Randomize Array
       </button>
       <div className="sliderContainer">
-        <h5>Array Size</h5>
+        <h5>Array Size: {arraySize}</h5>
         <input
           type="range"
           min="5"
           max="150"
           step="2"
           value={arraySize}
-          className="slider"
-          onChange={onChangeArraySize}
+          className={`slider ${!isRunning ? "active" : "blocked"}`}
+          onInput={onChangeArraySize}
+          disabled={isRunning}
         />
       </div>
       <button
         type="button"
         className="btn btn-primary algorithm"
         onClick={onClickBubbleSort}
+        disabled={isRunning}
       >
         Bubble Sort
       </button>
@@ -41,6 +45,7 @@ const NavBar = ({
         type="button"
         className="btn btn-secondary algorithm "
         onClick={onClickMergeSort}
+        disabled={isRunning}
       >
         Merge Sort
       </button>
@@ -48,6 +53,7 @@ const NavBar = ({
         type="button"
         className="btn btn-success algorithm"
         onClick={onClickQuickSort}
+        disabled={isRunning}
       >
         Quick Sort
       </button>
@@ -55,6 +61,7 @@ const NavBar = ({
         type="button"
         className="btn btn-danger algorithm"
         onClick={onClickHeapSort}
+        disabled={isRunning}
       >
         Heap Sort
       </button>
