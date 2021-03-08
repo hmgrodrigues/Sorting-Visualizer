@@ -19,13 +19,13 @@ function App() {
   //Calculate delay between renders
   const ACC =
     size <= 10
-      ? 750
+      ? 800
       : size <= 25
-      ? 300
+      ? 400
       : size <= 50
-      ? 100
-      : size <= 75
-      ? 50
+      ? 150
+      : size <= START_POINT
+      ? 25
       : 0;
 
   useEffect(() => {
