@@ -5,7 +5,7 @@ export const randomize = (arraySize) => {
   for (let i = 0; i < arraySize; i++)
     array.push({
       id: i,
-      height: Math.floor(Math.random() * 500) + 20,
+      height: Math.floor(Math.random() * 480) + 20,
     });
 
   return array;

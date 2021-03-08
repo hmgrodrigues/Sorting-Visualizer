@@ -1,3 +1,5 @@
+import { swapElements } from "./utils";
+
 // Main function that implements Heap Sort
 function heapSort(arr, n) {
   // Build heap (rearrange array)
@@ -31,14 +33,3 @@ function heapify(arr, n, i) {
     heapify(arr, n, largest);
   }
 }
-
-// Swap elements of an array
-function swapElements(array, i, j) {
-  let aux = array[i];
-  array[i] = array[j];
-  array[j] = aux;
-}
-
-const arr = [12, 11, 13, 5, 6, 7];
-heapSort(arr, arr.length);
-console.log(arr);

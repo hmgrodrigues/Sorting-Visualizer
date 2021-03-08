@@ -1,3 +1,5 @@
+import { swapElements } from "./utils";
+
 // Main function that implements QuickSort
 function quickSort(arr, low, high) {
   if (low < high) {
@@ -18,9 +20,9 @@ function partition(arr, low, high) {
 
   for (let j = low; j <= high - 1; j++) {
     if (arr[j] <= pivot) {
-      // swapElements(arr, ++i, j);
+      swapElements(arr, ++i, j);
     }
   }
-  // swapElements(arr, i + 1, high);
+  swapElements(arr, i + 1, high);
   return i + 1;
 }

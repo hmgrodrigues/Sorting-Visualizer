@@ -1,3 +1,5 @@
+import { swapElements } from "./utils";
+
 function bubbleSort(array) {
   if (n === 1) return;
 
