@@ -19,7 +19,7 @@ function App() {
   //Calculate delay between renders
   const ACC =
     size <= 10
-      ? 800
+      ? 5000
       : size <= 25
       ? 400
       : size <= 50
