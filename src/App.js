@@ -5,36 +5,37 @@ import { randomize, swapElements } from "./algorithms/utils";
 import "./App.css";
 
 const START_POINT = 78;
-const ACC = 1000;
+// const ACC = 1000;
 
 function App() {
   const [size, setSize] = useState(0);
   const [bars, setBars] = useState([]);
-  // const [running, setRunning] = useState(null);
+  const [running, setRunning] = useState(false);
 
   //Array to operate in algorithms
   const unsortedBars = [...bars];
+  const ACC = 1200 - Math.pow(size, 2) > 0 ? 1200 - Math.pow(size, 2) : 0;
 
   useEffect(() => {
     setSize(START_POINT);
-    // setRunning(false);
+    setRunning(false);
   }, []);
 
   useEffect(() => {
     setBars(randomize(size));
   }, [size]);
 
-  const endRunning = (delay) => {
+  const delayRunning = (run, delay) => {
     setTimeout(() => {
-      // setRunning(false);
+      setRunning(run);
     }, delay);
   };
 
   // Bubble Sort
   const handleBubbleSort = () => {
-    // setRunning(true);
+    // delayRunning(true, 10);
     const delay = bubbleSort(unsortedBars, ACC);
-    // endRunning(delay);
+    // delayRunning(false, delay);
   };
 
   const bubbleSort = (arr, delay) => {
@@ -76,6 +77,7 @@ function App() {
   // Merge Sort
   const handleMergeSort = () => {
     // setRunning(true);
+    const unsortedBars = [...bars];
     const delay = mergeSort(
       unsortedBars,
       0,
@@ -158,6 +160,7 @@ function App() {
   // Quick Sort
   const handleQuickSort = () => {
     // setRunning(true);
+    const unsortedBars = [...bars];
     const delay = quickSort(unsortedBars, 0, unsortedBars.length - 1, ACC);
     // endRunning(delay);
   };
@@ -209,6 +212,7 @@ function App() {
   // Heap Sort
   const handleHeapSort = () => {
     // setRunning(true);
+    const unsortedBars = [...bars];
     const delay = heapSort(unsortedBars, unsortedBars.length);
     // endRunning(delay);
   };
@@ -286,7 +290,7 @@ function App() {
         onClickMergeSort={handleMergeSort}
         onClickQuickSort={handleQuickSort}
         onClickHeapSort={handleHeapSort}
-        isRunning={false}
+        isRunning={running}
       />
       <Body bars={bars} />
     </Fragment>
