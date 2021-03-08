@@ -1,3 +1,5 @@
+This project is running on https://hmgrodrigues.github.io/Sorting-Visualizer/
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
