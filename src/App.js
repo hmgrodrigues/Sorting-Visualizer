@@ -5,16 +5,26 @@ import { randomize, swapElements } from "./algorithms/utils";
 import "./App.css";
 
 const START_POINT = 78;
-// const ACC = 1000;
 
 function App() {
   const [size, setSize] = useState(0);
   const [bars, setBars] = useState([]);
-  const [running, setRunning] = useState(false);
+  const [running, setRunning] = useState(null);
 
   //Array to operate in algorithms
-  const unsortedBars = [...bars];
-  const ACC = 1200 - Math.pow(size, 2) > 0 ? 1200 - Math.pow(size, 2) : 0;
+  const unsortedBars = bars.map((bar) => {
+    return { ...bar };
+  });
+  const ACC =
+    size <= 10
+      ? 750
+      : size <= 25
+      ? 300
+      : size <= 50
+      ? 100
+      : size <= 75
+      ? 50
+      : 0;
 
   useEffect(() => {
     setSize(START_POINT);
@@ -25,59 +35,9 @@ function App() {
     setBars(randomize(size));
   }, [size]);
 
-  const delayRunning = (run, delay) => {
-    setTimeout(() => {
-      setRunning(run);
-    }, delay);
-  };
-
-  // Bubble Sort
-  const handleBubbleSort = () => {
-    // delayRunning(true, 10);
-    const delay = bubbleSort(unsortedBars, ACC);
-    // delayRunning(false, delay);
-  };
-
-  const bubbleSort = (arr, delay) => {
-    let stop = null;
-    for (var i = 0; i < arr.length; i++) {
-      stop = true;
-
-      for (var j = 0; j < arr.length - i - 1; j++) {
-        colorElements(arr, [j, j + 1], delay, "eval");
-        delay += ACC;
-
-        if (arr[j].height > arr[j + 1].height) {
-          colorElements(arr, [j, j + 1], delay, "swap");
-          delay += ACC;
-          swapElements(arr, j, j + 1);
-          colorElements(arr, [j, j + 1], delay, "eval");
-          delay += ACC;
-          stop = false;
-        }
-      }
-      arr[j].status = "done";
-      colorElements(arr, [], delay);
-      delay += ACC;
-
-      if (stop) break;
-    }
-
-    if (stop) {
-      for (let remaining = 0; remaining < arr.length - i - 1; remaining++) {
-        arr[remaining].status = "done";
-        colorElements(arr, [], delay);
-        delay += ACC;
-      }
-    }
-
-    return delay;
-  };
-
   // Merge Sort
   const handleMergeSort = () => {
-    // setRunning(true);
-    const unsortedBars = [...bars];
+    setRunning(true);
     const delay = mergeSort(
       unsortedBars,
       0,
@@ -85,7 +45,7 @@ function App() {
       ACC,
       true
     );
-    // endRunning(delay);
+    delayRunning(delay);
   };
 
   const mergeSort = (arr, l, r, delay, last) => {
@@ -159,10 +119,9 @@ function App() {
 
   // Quick Sort
   const handleQuickSort = () => {
-    // setRunning(true);
-    const unsortedBars = [...bars];
+    setRunning(true);
     const delay = quickSort(unsortedBars, 0, unsortedBars.length - 1, ACC);
-    // endRunning(delay);
+    delayRunning(delay);
   };
 
   const quickSort = (arr, low, high, delay) => {
@@ -211,10 +170,9 @@ function App() {
 
   // Heap Sort
   const handleHeapSort = () => {
-    // setRunning(true);
-    const unsortedBars = [...bars];
+    setRunning(true);
     const delay = heapSort(unsortedBars, unsortedBars.length);
-    // endRunning(delay);
+    delayRunning(delay);
   };
 
   const heapSort = (arr, n) => {
@@ -266,6 +224,38 @@ function App() {
     return delay;
   };
 
+  // Bubble Sort
+  const handleBubbleSort = () => {
+    setRunning(true);
+    const delay = bubbleSort(unsortedBars, unsortedBars.length, ACC * 2);
+    delayRunning(delay);
+  };
+
+  const bubbleSort = (arr, n, delay) => {
+    if (n === 1) {
+      arr[0].status = "done";
+      colorElements(arr, [], delay);
+      return delay + ACC;
+    }
+
+    for (let i = 0; i < n - 1; i++) {
+      colorElements(arr, [i, i + 1], delay, "eval");
+      delay += ACC;
+      if (arr[i].height > arr[i + 1].height) {
+        colorElements(arr, [i, i + 1], delay, "swap");
+        delay += ACC;
+        swapElements(arr, i, i + 1);
+        colorElements(arr, [i, i + 1], delay, "eval");
+        delay += ACC;
+      }
+    }
+    arr[n - 1].status = "done";
+    colorElements(arr, [], delay);
+    delay += ACC;
+
+    return bubbleSort(arr, n - 1, delay);
+  };
+
   const colorElements = (arr, elements, delay, action) => {
     const newArr = arr.map((bar) => {
       return { ...bar };
@@ -280,16 +270,23 @@ function App() {
     }, delay);
   };
 
+  const delayRunning = (delay) => {
+    setTimeout(() => {
+      setRunning((prevRunning) => !prevRunning);
+    }, delay);
+  };
+
+  console.log(unsortedBars);
   return (
     <Fragment>
       <NavBar
         arraySize={size}
         onClickRandomizeArray={() => setBars(randomize(size))}
         onChangeArraySize={(e) => setSize(e.target.value)}
-        onClickBubbleSort={handleBubbleSort}
         onClickMergeSort={handleMergeSort}
         onClickQuickSort={handleQuickSort}
         onClickHeapSort={handleHeapSort}
+        onClickBubbleSort={handleBubbleSort}
         isRunning={running}
       />
       <Body bars={bars} />

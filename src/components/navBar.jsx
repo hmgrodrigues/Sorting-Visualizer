@@ -4,10 +4,10 @@ const NavBar = ({
   arraySize,
   onClickRandomizeArray,
   onChangeArraySize,
-  onClickBubbleSort,
   onClickMergeSort,
   onClickQuickSort,
   onClickHeapSort,
+  onClickBubbleSort,
   isRunning,
 }) => {
   return (
@@ -35,15 +35,7 @@ const NavBar = ({
       </div>
       <button
         type="button"
-        className="btn btn-primary algorithm"
-        onClick={onClickBubbleSort}
-        disabled={isRunning}
-      >
-        Bubble Sort
-      </button>
-      <button
-        type="button"
-        className="btn btn-secondary algorithm "
+        className="btn btn-primary algorithm "
         onClick={onClickMergeSort}
         disabled={isRunning}
       >
@@ -64,6 +56,14 @@ const NavBar = ({
         disabled={isRunning}
       >
         Heap Sort
+      </button>
+      <button
+        type="button"
+        className="btn btn-secondary algorithm"
+        onClick={onClickBubbleSort}
+        disabled={isRunning}
+      >
+        Bubble Sort
       </button>
     </div>
   );
