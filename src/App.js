@@ -229,7 +229,7 @@ function App() {
   // Bubble Sort
   const handleBubbleSort = () => {
     setRunning(true);
-    const delay = bubbleSort(unsortedBars, unsortedBars.length, ACC * 2);
+    const delay = bubbleSort(unsortedBars, unsortedBars.length, ACC);
     delayRunning(delay);
   };
 
