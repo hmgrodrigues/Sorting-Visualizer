@@ -15,6 +15,8 @@ function App() {
   const unsortedBars = bars.map((bar) => {
     return { ...bar };
   });
+
+  //Calculate delay between renders
   const ACC =
     size <= 10
       ? 750
