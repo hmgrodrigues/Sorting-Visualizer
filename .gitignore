@@ -22,8 +22,5 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-src/algorithms/bubbleSort.js
-src/algorithms/heapSort.js
-src/algorithms/mergeSort.js
-src/algorithms/quickSort.js
+*Sort.js
 
