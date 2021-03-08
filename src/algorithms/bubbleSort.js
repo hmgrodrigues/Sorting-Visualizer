@@ -1,21 +1,8 @@
 function bubbleSort(array) {
-  for (let i = 0; i < array.length; i++) {
-    let count = 0;
+  if (n === 1) return;
 
-    for (let j = 0; j < array.length - i - 1; j++) {
-      let current = array[j];
-      let next = array[j + 1];
+  for (let i = 0; i < n - 1; i++)
+    if (arr[i] > arr[i + 1]) swapElements(arr, i, i + 1);
 
-      if (current.height > next.height) {
-        const aux = array[j];
-        array[j] = array[j + 1];
-        array[j + 1] = aux;
-        count++;
-      }
-    }
-
-    if (count === 0) break;
-  }
-
-  return array;
+  bubbleSort(arr, n - 1, delay);
 }

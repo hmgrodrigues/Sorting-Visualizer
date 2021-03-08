@@ -276,7 +276,6 @@ function App() {
     }, delay);
   };
 
-  console.log(unsortedBars);
   return (
     <Fragment>
       <NavBar
