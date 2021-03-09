@@ -4,9 +4,9 @@ Running on https://hmgrodrigues.github.io/Sorting-Visualizer/
 
 This React project visually demonstrates how different sorting algorithms perform.
 
-##
+## Algorithms
 
-Implement and ed also:
+Implemented:
 
 * **Merge Sort**
 * **Quick Sort**
