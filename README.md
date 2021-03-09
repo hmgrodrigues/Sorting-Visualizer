@@ -1,4 +1,21 @@
-This project is running on https://hmgrodrigues.github.io/Sorting-Visualizer/
+# Sorting Visualizer 
+
+Running on https://hmgrodrigues.github.io/Sorting-Visualizer/
+
+This React project visually demonstrates how different sorting algorithms perform.
+
+##
+
+Implement and ed also:
+
+* **Merge Sort**
+* **Quick Sort**
+* **Heap Sort**
+* **Bubble Sort**
+
+## Interface
+
+The user can randomize the bar values and can also define the size of the array.
 
 # Getting Started with Create React App
 
