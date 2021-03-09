@@ -25,8 +25,8 @@ function App() {
       : size <= 50
       ? 150
       : size <= START_POINT
-      ? 25
-      : 0;
+      ? 50
+      : 25;
 
   useEffect(() => {
     setSize(START_POINT);
@@ -275,7 +275,13 @@ function App() {
   const delayRunning = (delay) => {
     setTimeout(() => {
       setRunning((prevRunning) => !prevRunning);
-    }, delay);
+      setBars(
+        unsortedBars.map((bar) => {
+          delete bar.status;
+          return bar;
+        })
+      );
+    }, delay + 1000);
   };
 
   return (
