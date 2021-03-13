@@ -1,8 +1,8 @@
 # Sorting Visualizer 
 
-Running on https://hmgrodrigues.github.io/Sorting-Visualizer/
-
 This React project visually demonstrates how different sorting algorithms perform.
+
+Running on https://hmgrodrigues.github.io/Sorting-Visualizer/
 
 ## Algorithms
 
