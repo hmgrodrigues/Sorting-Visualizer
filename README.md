@@ -2,7 +2,7 @@
 
 This React project visually demonstrates how different sorting algorithms perform.
 
-Running on https://hmgrodrigues.github.io/Sorting-Visualizer/
+Running on https://hugorodrigues99.github.io/Sorting-Visualizer/
 
 ## Algorithms
 
